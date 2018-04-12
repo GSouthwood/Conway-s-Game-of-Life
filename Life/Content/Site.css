@@ -1,0 +1,34 @@
+﻿body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.cell {
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    width: 30px;
+    height: 30px;
+}
+.alive {
+    background-color: green;
+    color: green;
+    text-align: center;
+}
+.dead {
+    background-color: white;
+    color: white;
+    text-align: center;
+}
+table {
+    display: inline-block;
+}
+p {
+     max-width: 20px;
+     display: inline;
+}

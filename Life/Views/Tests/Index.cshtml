@@ -1,0 +1,347 @@
+﻿@using Life.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/conways-game-script.js"></script>
+@model Grid
+
+@{
+    int cellCount = 0;
+    int cellCountResult1 = 0;
+    int cellCountResult2 = 0;
+    int cellCountResult3 = 0;
+    int cellCountResult4 = 0;
+    int cellCountResult5 = 0;
+    int testTwoCellCount = 0;
+    int testTwoResult1 = 0;
+}
+@if (Model.Rows == 3)
+{
+
+
+    <h1>Test 1</h1>
+    <table style="display: block">
+
+        @for (int row = 1; row <= Model.Rows; row++)
+        {
+            string rowId = $"row_{row}";
+            <tr id="@rowId" class="grid">
+
+                @for (int column = 1; column <= Model.Columns; column++)
+                {
+                    cellCount++;
+                    string cellId = $"row_{row}_column_{column}";
+                    string cellClass = "cell";
+                    string cellState = "";
+                    int cellData = 2;
+
+
+
+                    if (cellCount == 1 || cellCount == 2 || cellCount == 5 || cellCount == 9)
+                    {
+                        cellState = "alive";
+                        cellClass += $" {cellState}";
+                        cellData = 1;
+                        <td id="@cellId" class="@cellClass @cellCount" data-cell="@cellData">1</td>
+                    }
+                    else
+                    {
+                        cellState = "dead";
+                        cellClass += $" {cellState}";
+                        <td id="@cellId" class="@cellClass @cellCount" data-cell="@cellData">2</td>
+                    }
+
+                }
+            </tr>
+        }
+
+    </table>
+    
+    <br />
+    <button type="submit" onclick="PlayGame(@Model.Rows, @Model.Columns)">Run simulation</button>
+    <br />
+    <br />
+    <button type="submit" onclick="PlayAgain()">Refresh test</button>
+    <br /><br />
+    <p>Desired Result 1</p>
+    <table style="display:  inline-block">
+
+        @for (int row = 1; row <= Model.Rows; row++)
+        {
+
+            <tr class="grid">
+
+                @for (int column = 1; column <= Model.Columns; column++)
+                    {
+                        cellCountResult1++;
+
+                        string cellClass = "cell";
+                        string cellState = "";
+                        int cellData = 2;
+
+
+
+                        if (cellCountResult1 == 1 || cellCountResult1 == 2 || cellCountResult1 == 4 || cellCountResult1 == 5 || cellCountResult1 == 6)
+                        {
+                            cellState = "alive";
+                            cellClass += $" {cellState}";
+                            cellData = 1;
+                        <td class="@cellClass @cellCountResult1" data-cell="@cellData"></td>
+                    }
+                    else
+                    {
+                        cellState = "dead";
+                        cellClass += $" {cellState}";
+                        <td class="@cellClass @cellCountResult1" data-cell="@cellData"></td>
+                    }
+
+                }
+            </tr>
+        }
+
+    </table>
+
+        <p> Desired Result 2</p>
+        <table style="display:  inline-block">
+
+            @for (int row = 1; row <= Model.Rows; row++)
+            {
+
+                <tr class="grid">
+
+                    @for (int column = 1; column <= Model.Columns; column++)
+                    {
+                        cellCountResult2++;
+
+                        string cellClass = "cell";
+                        string cellState = "";
+                        int cellData = 2;
+
+
+
+                        if (cellCountResult2 == 1 || cellCountResult2 == 3 || cellCountResult2 == 4 || cellCountResult2 == 6 || cellCountResult2 == 8)
+                        {
+                            cellState = "alive";
+                            cellClass += $" {cellState}";
+                            cellData = 1;
+                            <td class="@cellClass @cellCountResult2" data-cell="@cellData"></td>
+                        }
+                        else
+                        {
+                            cellState = "dead";
+                            cellClass += $" {cellState}";
+                            <td class="@cellClass @cellCountResult2" data-cell="@cellData"></td>
+                        }
+
+                    }
+                </tr>
+            }
+
+        </table>
+
+        <p>Desired Result 3</p>
+        <table style="display:  inline-block">
+
+            @for (int row = 1; row <= Model.Rows; row++)
+            {
+
+                <tr class="grid">
+
+                    @for (int column = 1; column <= Model.Columns; column++)
+                    {
+                        cellCountResult3++;
+
+                        string cellClass = "cell";
+                        string cellState = "";
+                        int cellData = 2;
+
+
+
+                        if (cellCountResult3 == 4 || cellCountResult3 == 6 || cellCountResult3 == 8)
+                        {
+                            cellState = "alive";
+                            cellClass += $" {cellState}";
+                            cellData = 1;
+                            <td class="@cellClass @cellCountResult3" data-cell="@cellData"></td>
+                        }
+                        else
+                        {
+                            cellState = "dead";
+                            cellClass += $" {cellState}";
+                            <td class="@cellClass @cellCountResult3" data-cell="@cellData"></td>
+                        }
+
+                    }
+                </tr>
+            }
+
+        </table>
+
+    <p>Desired Result 4</p>
+        <table style="display:  inline-block">
+
+            @for (int row = 1; row <= Model.Rows; row++)
+            {
+
+                <tr class="grid">
+
+                    @for (int column = 1; column <= Model.Columns; column++)
+                    {
+                        cellCountResult4++;
+
+                        string cellClass = "cell";
+                        string cellState = "";
+                        int cellData = 2;
+
+
+
+                        if (cellCountResult4 == 5 || cellCountResult4 == 8)
+                        {
+                            cellState = "alive";
+                            cellClass += $" {cellState}";
+                            cellData = 1;
+                            <td class="@cellClass @cellCountResult4" data-cell="@cellData"></td>
+                        }
+                        else
+                        {
+                            cellState = "dead";
+                            cellClass += $" {cellState}";
+                            <td class="@cellClass @cellCountResult4" data-cell="@cellData"></td>
+                        }
+
+                    }
+                </tr>
+            }
+
+        </table>
+
+    <p>Desired Result 5</p>
+        <table style="display: inline-block">
+
+            @for (int row = 1; row <= Model.Rows; row++)
+            {
+
+                <tr class="grid">
+
+                    @for (int column = 1; column <= Model.Columns; column++)
+                    {
+                        cellCountResult5++;
+
+                        string cellClass = "cell";
+                        string cellState = "";
+                        int cellData = 2;
+
+
+
+
+                        cellState = "dead";
+                        cellClass += $" {cellState}";
+                        <td class="@cellClass @cellCountResult5" data-cell="@cellData"></td>
+
+
+                    }
+                </tr>
+            }
+
+        </table>
+        <br /><br />
+        using (Html.BeginForm("Index", "Tests", FormMethod.Get))
+        {
+            @Html.Hidden("id", "testtwo");
+            <button type="submit">Go to next test</button>
+        }
+}
+
+@if (Model.Rows == 6)
+{
+
+
+<h1>Test 2</h1>
+<table style="display: block">
+
+    @for (int row = 1; row <= Model.Rows; row++)
+    {
+        string rowId = $"row_{row}";
+        <tr id="@rowId" class="grid">
+
+            @for (int column = 1; column <= Model.Columns; column++)
+            {
+                testTwoCellCount++;
+                string cellId = $"row_{row}_column_{column}";
+                string cellClass = "cell";
+                string cellState = "";
+                int cellData = 2;
+
+
+
+                if (testTwoCellCount == 7 || testTwoCellCount == 9 || testTwoCellCount == 10 || testTwoCellCount == 11 || testTwoCellCount == 15
+                    || testTwoCellCount == 23 || testTwoCellCount == 36 || testTwoCellCount == 37 || testTwoCellCount == 44 || testTwoCellCount == 45)
+                {
+                    cellState = "alive";
+                    cellClass += $" {cellState}";
+                    cellData = 1;
+                    <td id="@cellId" class="@cellClass @testTwoCellCount" data-cell="@cellData">1</td>
+                }
+                else
+                {
+                    cellState = "dead";
+                    cellClass += $" {cellState}";
+                    <td id="@cellId" class="@cellClass @testTwoCellCount" data-cell="@cellData">2</td>
+                }
+
+            }
+        </tr>
+    }
+
+</table>
+<br />
+<button type="submit" onclick="PlayGame(@Model.Rows, @Model.Columns)">Run simulation</button>
+<br />
+<br /><br />
+<p> Desired Result</p>
+<table style="display: inline-block">
+
+    @for (int row = 1; row <= Model.Rows; row++)
+    {
+
+        <tr class="grid">
+
+            @for (int column = 1; column <= Model.Columns; column++)
+            {
+                testTwoResult1++;
+
+                string cellClass = "cell";
+                string cellState = "";
+                int cellData = 2;
+
+
+
+                if (testTwoResult1 == 2 || testTwoResult1 == 10 || testTwoResult1 == 18 || testTwoResult1 == 14 || testTwoResult1 == 15
+                    || testTwoResult1 == 16 || testTwoResult1 == 36 || testTwoResult1 == 37 || testTwoResult1 == 44 || testTwoResult1 == 45)
+                {
+                    cellState = "alive";
+                    cellClass += $" {cellState}";
+                    cellData = 1;
+                    <td class="@cellClass @testTwoResult1" data-cell="@cellData"></td>
+                }
+                else
+                {
+                    cellState = "dead";
+                    cellClass += $" {cellState}";
+                    <td class="@cellClass @testTwoResult1" data-cell="@cellData"></td>
+                }
+
+            }
+        </tr>
+    }
+
+</table>
+
+}
+
+<br /><br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <button style="margin-left: 40%">Go back to game</button>
+}

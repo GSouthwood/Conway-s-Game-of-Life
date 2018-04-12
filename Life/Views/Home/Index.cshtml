@@ -1,0 +1,76 @@
+﻿@using Life.Models
+
+@{
+    ViewBag.Title = "Conway's Game of Life";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/conways-game-script.js"></script>
+
+@model Grid
+
+@{
+    Random rnd = new Random();
+    int cellCount = 0;
+
+}
+
+<div style="display: inline-block">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "form" }))
+    {
+        @Html.Label("Select Rows")<br />
+        @Html.TextBoxFor(m => m.Rows)<br />
+        @Html.Label("Select Columns")<br />
+        @Html.TextBoxFor(m => m.Columns)
+
+        <button>Submit</button>
+    }
+</div>
+<br />
+
+
+Alive <div style="background-color: green;height: 20px; width: 20px"></div>
+Dead <div style="background-color: white; border: solid; height: 20px; width: 20px; border-width: 1px; border-color: black; width: 20px"></div>
+<br />
+<table>
+   
+    @for (int row = 1; row <= Model.Rows; row++)
+    {
+        string rowId = $"row_{row}";
+        <tr id="@rowId" class="grid">
+
+            @for (int column = 1; column <= Model.Columns; column++)
+            {
+                cellCount++;
+                string cellId = $"row_{row}_column_{column}";
+                string cellClass = "cell";
+                string cellState = Grid.AliveOrDead(rnd);
+                int cellData = 2;
+                cellClass += $" {cellState}";
+
+
+                if (cellState == "alive")
+                {
+                    cellData = 1;
+                    <td id="@cellId" class="@cellClass @cellCount" data-cell="@cellData">1</td>
+                }
+                else
+                {
+                    <td id="@cellId" class="@cellClass @cellCount" data-cell="@cellData">2</td>
+                }
+
+            }
+        </tr>
+    }
+
+</table>
+
+<br />
+<button type="submit" onclick="PlayGame(@Model.Rows, @Model.Columns)">Run simulation</button> <button type="submit" onclick="PlayAgain()">Randomize grid</button>
+
+<br /><br />
+@using (Html.BeginForm("Index", "Tests", FormMethod.Get))
+{
+    <button>Go to tests</button>
+}
